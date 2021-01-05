@@ -15,6 +15,9 @@ namespace Decor_Utility
 
         public const  string EmailAdmin = "rafaelgoldberg01@gmail.com";
 
+        public const  string CategoryName = "Category";
+        public const  string ApplicationTypeName = "ApplicationType";
+
 
     }
 }

@@ -18,6 +18,7 @@ namespace Decor_DataAccess.Repository.IRepository
         T FirstOrDefault(
                 Expression<Func<T, bool>> filter = null,
                 Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+                string includeProperties = null,
                 bool isTracking = true
             );
         void Add(T entity);

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Decor_DataAccess.Data;
+using Decor_DataAccess.Repository;
+using Decor_DataAccess.Repository.IRepository;
 using Decor_Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -44,6 +46,9 @@ namespace Decor
                 Options.Cookie.HttpOnly = true;
                 Options.Cookie.IsEssential = true;
             });
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IApplicationTypeRepository, ApplicationTypeRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddControllersWithViews();
         }
 

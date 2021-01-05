@@ -1,4 +1,5 @@
 ﻿using Decor_DataAccess.Data;
+using Decor_DataAccess.Repository.IRepository;
 using Decor_Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,15 +13,15 @@ namespace Decor.Controllers
     [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        private readonly ICategoryRepository _catRepo;
 
-        public CategoryController(ApplicationDbContext db)
+        public CategoryController(ICategoryRepository catRepo)
         {
-            _db = db;
+            _catRepo = catRepo;
         }
         public IActionResult Index()
         {
-            IEnumerable<Category> objList = _db.Category;
+            IEnumerable<Category> objList = _catRepo.GetAll();
             return View(objList);
         }
 
@@ -39,8 +40,8 @@ namespace Decor.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Category.Add(obj);
-                _db.SaveChanges();
+               _catRepo.Add(obj);
+                _catRepo.Save();
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -57,7 +58,7 @@ namespace Decor.Controllers
                 return NotFound();
             }
 
-            var obj = _db.Category.Find(Id);
+            var obj = _catRepo.Find(Id.GetValueOrDefault());
 
             if (obj == null)
             {
@@ -75,8 +76,8 @@ namespace Decor.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Category.Update(obj);
-                _db.SaveChanges();
+               _catRepo.Update(obj);
+               _catRepo.Save();
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -94,7 +95,7 @@ namespace Decor.Controllers
                 return NotFound();
             }
 
-            var obj = _db.Category.Find(Id);
+            var obj = _catRepo.Find(Id.GetValueOrDefault());
 
             if (obj == null)
             {
@@ -110,13 +111,13 @@ namespace Decor.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeletePost(int? id)
         {
-            var obj = _db.Category.Find(id);
+            var obj = _catRepo.Find(id.GetValueOrDefault());
             if (obj == null)
             {
                 return NotFound(); 
             }
-            _db.Category.Remove(obj);
-            _db.SaveChanges();
+            _catRepo.Remove(obj);
+            _catRepo.Save();
             return RedirectToAction("Index");
 
         }
