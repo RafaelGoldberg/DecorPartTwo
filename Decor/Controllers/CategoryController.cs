@@ -1,6 +1,7 @@
 ﻿using Decor_DataAccess.Data;
 using Decor_DataAccess.Repository.IRepository;
 using Decor_Models;
+using Decor_Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -42,8 +43,10 @@ namespace Decor.Controllers
             {
                _catRepo.Add(obj);
                 _catRepo.Save();
+                TempData[WC.Success] = "Category Created Successfully";
                 return RedirectToAction("Index");
             }
+            TempData[WC.Error] = "Error while creating category!";
             return View(obj);
          
         }
@@ -118,6 +121,7 @@ namespace Decor.Controllers
             }
             _catRepo.Remove(obj);
             _catRepo.Save();
+            TempData[WC.Error] = "Category Successfully Deleted!";
             return RedirectToAction("Index");
 
         }

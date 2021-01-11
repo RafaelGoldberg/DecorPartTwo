@@ -61,7 +61,7 @@ namespace Decor.Controllers
                 CategorySelectList = _prodRepo.GetAllDropdownList(WC.CategoryName),
                 ApplicationTypeSelectList = _prodRepo.GetAllDropdownList(WC.ApplicationTypeName)
 
-        };
+            };
             if (id == null)
             {
                 //This is for create

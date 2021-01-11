@@ -9,6 +9,7 @@ namespace Decor_Utility
     {
         public const  string ImagePath = @"\Images\productImages";
         public const  string SessionCart = "ShoppingCartSession";
+        public const  string SessionInquiryId = "InquirySession";
 
         public const    string AdminRole = "Admin";
         public const    string CustomerRole = "Customer";
@@ -17,6 +18,10 @@ namespace Decor_Utility
 
         public const  string CategoryName = "Category";
         public const  string ApplicationTypeName = "ApplicationType";
+
+
+        public const  string Success = "Success";
+        public const  string Error = "Error";
 
 
     }
