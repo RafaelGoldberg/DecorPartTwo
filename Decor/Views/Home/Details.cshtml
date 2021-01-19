@@ -1,8 +1,9 @@
 ﻿@model Decor_Models.ViewModels.DetailsVM
+@using Decor_Utility
 
 <div class="">
     <form method="post">
-        <input asp-for="@Model.Product.Id" type="hidden"  />
+        <input asp-for="@Model.Product.Id" type="hidden" />
         <div class="container backgroundWhite pt-4">
             <div class="card" style="border:1px solid #000000; ">
                 <div class="card-header bg-dark text-light ml-0 row container" style="border-radius: 0px;">
@@ -29,6 +30,23 @@
 
                                         <p class="text-secondary">@Html.Raw(Model.Product.Description)</p>
                                     </div>
+                                    @if (User.IsInRole(WC.AdminRole))
+                                    {
+                                        <div class="col-12">
+                                            SqFt:
+                                        </div>
+                                        <div class="col-12">
+                                            @if (Model.ExistsInCart)
+                                            {
+                                                <input asp-for="@Model.Product.TempSqFt" disabled class="form-control" />
+                                            }
+                                            else
+                                            {
+                                                <input asp-for="@Model.Product.TempSqFt"  class="form-control" />
+                                            }
+                                        <span asp-validation-for="@Model.Product.TempSqFt" class="text-danger"></span>
+                                        </div>
+                                    }
 
                                 </div>
                             </div>
