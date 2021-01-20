@@ -1,10 +1,13 @@
-﻿using Decor_DataAccess.Data;
+﻿using Braintree;
+using Decor_DataAccess.Data;
 using Decor_DataAccess.Repository.IRepository;
 using Decor_Models;
 using Decor_Models.ViewModels;
 using Decor_Utility;
+using Decor_Utility.BrainTree;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -27,6 +30,9 @@ namespace Decor.Controllers
         private readonly IApplicationUserRepository _userRepo;
         private readonly IInquiryHeaderRepository _inqHRepo;
         private readonly IInquiryDetailRepository _inqDRepo;
+        private readonly IOrderHeaderRepository _orderHRepo;
+        private readonly IOrderDetailRepository _orderDRepo;
+        private readonly IBrainTreeGate _brain;
 
         [BindProperty]
         public ProductUserVM ProductUserVM { get; set; }
@@ -37,7 +43,10 @@ namespace Decor.Controllers
             IProductRepository prodRepo,
             IApplicationUserRepository userRepo,
             IInquiryHeaderRepository inqHRepo,
-            IInquiryDetailRepository inqDRepo
+            IInquiryDetailRepository inqDRepo,
+            IOrderHeaderRepository orderHRepo,
+            IOrderDetailRepository orderDRepo,
+            IBrainTreeGate brain
             )
         {
             _webHostEnvironment = webHostEnvironment;
@@ -46,6 +55,9 @@ namespace Decor.Controllers
             _userRepo = userRepo;
             _inqHRepo = inqHRepo;
             _inqDRepo = inqDRepo;
+            _orderHRepo = orderHRepo;
+            _orderDRepo = orderDRepo;
+            _brain = brain;
         }
 
         public IActionResult Index()
@@ -107,6 +119,10 @@ namespace Decor.Controllers
                 {
                     applicationUser = new ApplicationUser();
                 }
+
+                var gateway = _brain.GetGateway();
+                var clientToken = gateway.ClientToken.Generate();
+                ViewBag.ClientToken = clientToken;
             }
             else
             {
@@ -151,66 +167,145 @@ namespace Decor.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Summary")]
-        public  async Task<IActionResult> SummaryPost(ProductUserVM ProductUserVM)
+        public  async Task<IActionResult> SummaryPost(IFormCollection collection, ProductUserVM ProductUserVM)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-            var PathToTemplate = _webHostEnvironment.WebRootPath + Path.DirectorySeparatorChar.ToString()
-        + "templates" + Path.DirectorySeparatorChar.ToString() + "inquiry.html";
-            var subject = "New Inquiry";
-            string HtmlBody = "";
-            using (StreamReader sr = System.IO.File.OpenText(PathToTemplate))
+
+            if (User.IsInRole(WC.AdminRole))
             {
-                HtmlBody = sr.ReadToEnd();
-            }
-            //Name: { 0}
+                // we need to create an order
+                //var orderTotal = 0.0;
+                //foreach (Product product in ProductUserVM.ProductList)
+                //{
+                //    orderTotal += product.Price * product.TempSqFt;
 
-
-            StringBuilder productListSB = new StringBuilder();
-            foreach (var prod in ProductUserVM.ProductList)
-            {
-                productListSB.Append($" - Name: {prod.Name} <span style='font-size:14px'>(ID: {prod.Id})</span> <br/>");
-            }
-            string messageBody = string.Format(HtmlBody,
-                ProductUserVM.ApplicationUser.FullName,
-                ProductUserVM.ApplicationUser.Email,
-                ProductUserVM.ApplicationUser.PhoneNumber,
-                productListSB.ToString());
-
-            await _emailSender.SendEmailAsync(WC.EmailAdmin, subject, messageBody);
-
-            InquiryHeader inquiryHeader = new InquiryHeader()
-            {
-                ApplicationUserId = claim.Value,
-                FullName = ProductUserVM.ApplicationUser.FullName,
-                Email = ProductUserVM.ApplicationUser.Email,
-                PhoneNumber = ProductUserVM.ApplicationUser.PhoneNumber,
-                InquiryDate = DateTime.Now
-            };
-
-            _inqHRepo.Add(inquiryHeader);
-            _inqHRepo.Save();
-
-            foreach (var prod in ProductUserVM.ProductList)
-            {
-                InquiryDetail inquiryDetail = new InquiryDetail()
+                //}
+                OrderHeader orderHeader = new OrderHeader
                 {
-                    InquiryHeaderId = inquiryHeader.Id,
-                    ProductId = prod.Id
+                    CreatedByUserId = claim.Value,
+                    FinalOrderTotal = ProductUserVM.ProductList.Sum(x => x.TempSqFt * x.Price),
+                    StreetAddress = ProductUserVM.ApplicationUser.Address,
+                    City = ProductUserVM.ApplicationUser.City,
+                    State = ProductUserVM.ApplicationUser.State,
+                    PostalCode = ProductUserVM.ApplicationUser.ZipCode,
+                    FullName = ProductUserVM.ApplicationUser.FullName,
+                    Email = ProductUserVM.ApplicationUser.Email,
+                    PhoneNumber = ProductUserVM.ApplicationUser.PhoneNumber,
+                    OrderDate = DateTime.Now,
+                    OrderStatus = WC.StatusPending
                 };
-                _inqDRepo.Add(inquiryDetail);
+
+                _orderHRepo.Add(orderHeader);
+                _orderHRepo.Save();
+
+                foreach (var prod in ProductUserVM.ProductList)
+                {
+                    OrderDetail orderDetail = new OrderDetail()
+                    {
+                        OrderHeaderId = orderHeader.Id,
+                        ProductId = prod.Id,
+                        PricePerSqFt = prod.Price,
+                        Sqft = prod.TempSqFt,
+                    };
+                    _orderDRepo.Add(orderDetail);
+                }
+                _orderDRepo.Save();
+
+                string nonceFromTheClient = collection["payment_method_nonce"];
+
+                var request = new TransactionRequest
+                {
+                    Amount = Convert.ToDecimal(orderHeader.FinalOrderTotal),
+                    PaymentMethodNonce = nonceFromTheClient,
+                    OrderId = orderHeader.Id.ToString(),
+                    Options = new TransactionOptionsRequest
+                    {
+                        SubmitForSettlement = true
+                    }
+                };
+                var gateway = _brain.GetGateway();
+                Result<Transaction> result = gateway.Transaction.Sale(request);
+
+                if (result.Target.ProcessorResponseText == "Approved")
+                {
+                    orderHeader.TransactionId = result.Target.Id;
+                    orderHeader.OrderStatus = WC.StatusApproved;
+
+                }
+                else
+                {
+                    orderHeader.OrderStatus = WC.StatusCancelled;
+                }
+                _orderHRepo.Save();
+
+                return RedirectToAction(nameof(InquiryConfirmation), new {id=orderHeader.Id });
+
             }
-            _inqDRepo.Save();
+            else
+            {
+                // we need to create an inquiry
+                var PathToTemplate = _webHostEnvironment.WebRootPath + Path.DirectorySeparatorChar.ToString()
+    + "templates" + Path.DirectorySeparatorChar.ToString() + "inquiry.html";
+                var subject = "New Inquiry";
+                string HtmlBody = "";
+                using (StreamReader sr = System.IO.File.OpenText(PathToTemplate))
+                {
+                    HtmlBody = sr.ReadToEnd();
+                }
+                //Name: { 0}
+
+
+                StringBuilder productListSB = new StringBuilder();
+                foreach (var prod in ProductUserVM.ProductList)
+                {
+                    productListSB.Append($" - Name: {prod.Name} <span style='font-size:14px'>(ID: {prod.Id})</span> <br/>");
+                }
+                string messageBody = string.Format(HtmlBody,
+                    ProductUserVM.ApplicationUser.FullName,
+                    ProductUserVM.ApplicationUser.Email,
+                    ProductUserVM.ApplicationUser.PhoneNumber,
+                    productListSB.ToString());
+
+                await _emailSender.SendEmailAsync(WC.EmailAdmin, subject, messageBody);
+
+                InquiryHeader inquiryHeader = new InquiryHeader()
+                {
+                    ApplicationUserId = claim.Value,
+                    FullName = ProductUserVM.ApplicationUser.FullName,
+                    Email = ProductUserVM.ApplicationUser.Email,
+                    PhoneNumber = ProductUserVM.ApplicationUser.PhoneNumber,
+                    InquiryDate = DateTime.Now
+                };
+
+                _inqHRepo.Add(inquiryHeader);
+                _inqHRepo.Save();
+
+                foreach (var prod in ProductUserVM.ProductList)
+                {
+                    InquiryDetail inquiryDetail = new InquiryDetail()
+                    {
+                        InquiryHeaderId = inquiryHeader.Id,
+                        ProductId = prod.Id
+                    };
+                    _inqDRepo.Add(inquiryDetail);
+                }
+                _inqDRepo.Save();
+
+                TempData[WC.Success] = "Inquiry submitted successfully";
+            }
+
+            
 
             return RedirectToAction(nameof(InquiryConfirmation));
         }
 
-        public IActionResult InquiryConfirmation()
+        public IActionResult InquiryConfirmation(int id = 0)
         {
-
+            OrderHeader orderHeader = _orderHRepo.FirstOrDefault(u => u.Id == id);
             HttpContext.Session.Clear();
-            return View();
+            return View(orderHeader);
         }
 
 
@@ -242,6 +337,14 @@ namespace Decor.Controllers
             }
             HttpContext.Session.Set(WC.SessionCart, shoppingCartList);
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Clear(int id)
+        {
+ 
+            HttpContext.Session.Clear();
+            TempData[WC.Success] = "Cart Successfully Cleared";
+            return RedirectToAction("Index","Home");
         }
     }
 }

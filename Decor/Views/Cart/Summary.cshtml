@@ -1,7 +1,7 @@
 ﻿@model Decor_Models.ViewModels.ProductUserVM
 @using Decor_Utility
 
-<form method="post">
+<form method="post" id="payment-form">
     <br />
     <div class="backgroundWhiteBorder">
         <div class="container">
@@ -102,12 +102,14 @@
                                         {
                                             <input type="hidden" asp-for="@Model.ProductList[i].Id" />
                                             <input type="hidden" asp-for="@Model.ProductList[i].Name" />
+                                            <input type="hidden" asp-for="@Model.ProductList[i].Price" />
+                                            <input type="hidden" asp-for="@Model.ProductList[i].TempSqFt" />
                                             <li class="list-group-item d-flex justify-content-between">
                                                 <div>
                                                     <h6 class="my-0">@Model.ProductList[i].Name</h6>
                                                     @if (User.IsInRole(WC.AdminRole))
                                                     {
-                                                <small class="text-muted">Sqft: @Model.ProductList[i].TempSqFt x @Model.ProductList[i].Price</small>
+                                                        <small class="text-muted">Sqft: @Model.ProductList[i].TempSqFt x @Model.ProductList[i].Price</small>
                                                     }
                                                     else
                                                     {
@@ -131,6 +133,17 @@
                                     </ul>
                                 </div>
                             </div>
+                            @if (User.IsInRole(WC.AdminRole))
+                            {
+                                <div class="col-12">
+                                    <div class="wrapper">
+                                        <div class="checkout container">
+                                            <div id="dropin-container"></div>
+                                            <input id="nonce" name="payment_method_nonce" type="hidden" />
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
@@ -139,7 +152,7 @@
                         <div class="col-12 col-md-5 offset-md-7">
                             @if (User.IsInRole(WC.AdminRole))
                             {
-                                <button  class="btn btn-success form-control" id="submit-button">Submit Order</button>
+                                <button class="btn btn-success form-control" id="submit-button">Submit Order</button>
                             }
                             else
                             {
@@ -157,4 +170,37 @@
 
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
+
+    @if (User.IsInRole(WC.AdminRole))
+    {
+        <script src="https://js.braintreegateway.com/web/dropin/1.25.0/js/dropin.min.js"></script>
+        <script>
+        var client_token = "@ViewBag.ClientToken";
+        const form = document.getElementById('payment-form');
+
+        braintree.dropin.create({
+            authorization: client_token,
+            container: '#dropin-container'
+        }, (error, dropinInstance) => {
+            if (error) console.error(error);
+
+            form.addEventListener('submit', event => {
+                event.preventDefault();
+
+                dropinInstance.requestPaymentMethod((error, payload) => {
+                    if (error) console.error(error);
+
+                    // Step four: when the user is ready to complete their
+                    //   transaction, use the dropinInstance to get a payment
+                    //   method nonce for the user's selected payment method, then add
+                    //   it a the hidden field before submitting the complete form to
+                    //   a server-side integration
+                    document.getElementById('nonce').value = payload.nonce;
+                    form.submit();
+                });
+            });
+        });
+        </script>
+    }
+
 }
