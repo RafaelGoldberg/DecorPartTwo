@@ -57,6 +57,11 @@ namespace Decor
             services.AddScoped<IOrderHeaderRepository, OrderHeaderRepository>();
             services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
             services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+            services.AddAuthentication().AddFacebook(Options =>
+            {
+                Options.AppId = "166165531738280";
+                Options.AppSecret = "2984f19fe7b7d05ffd328ebd13b60d51";
+            });
             services.AddControllersWithViews();
         }
 
