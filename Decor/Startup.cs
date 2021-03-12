@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Decor_DataAccess.Data;
+using Decor_DataAccess.Initializer;
 using Decor_DataAccess.Repository;
 using Decor_DataAccess.Repository.IRepository;
 using Decor_Utility;
@@ -57,6 +58,7 @@ namespace Decor
             services.AddScoped<IOrderHeaderRepository, OrderHeaderRepository>();
             services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
             services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+            services.AddScoped<IDbInitializer, DbInitializer>();
             services.AddAuthentication().AddFacebook(Options =>
             {
                 Options.AppId = "166165531738280";
@@ -66,7 +68,7 @@ namespace Decor
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitializer dbInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -84,6 +86,7 @@ namespace Decor
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            dbInitializer.Initialize();
             app.UseSession();
             app.UseEndpoints(endpoints =>
             {

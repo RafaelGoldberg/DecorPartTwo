@@ -38,7 +38,7 @@ namespace Decor_Models
         public virtual ApplicationType ApplicationType { get; set; }
 
         [NotMapped]
-        [Range(1,10000)]
+        [Range(1,10000, ErrorMessage ="SqFt must be Greater then 0")]
         public int TempSqFt { get; set; }
     }
 }

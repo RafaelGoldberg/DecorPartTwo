@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Decor_Models.ViewModels
 {
-    public class InquiryVM
+    public class OrderVM
     {
-        public InquiryHeader InquiryHeader { get; set; }
-        public IEnumerable<InquiryDetail> InquiryDetail { get; set; }
+        public OrderHeader OrderHeader { get; set; }
+        public IEnumerable<OrderDetail> OrderDetail { get; set; }
     }
 }

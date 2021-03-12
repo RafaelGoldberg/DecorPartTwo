@@ -88,13 +88,13 @@
                                     </div>
                                     @if (User.IsInRole(WC.AdminRole))
                                     {
-                                        <div class="col-4 col-lg-2 pt-lg-4" style="font-size:11px;">
-                                            <input type="text" asp-for="@Model[i].TempSqFt" class="form-control" />
-
-                                        </div>
+                                <div class="col-4 col-lg-2 pt-lg-4" style="font-size:11px;">
+                                    <input type="text" asp-for="@Model[i].TempSqFt" class="form-control" />
+                                    <span asp-validation-for="@Model[i].TempSqFt" class="text-danger"></span>
+                                </div>
                                         <div class="col-3 col-lg-2 pt-lg-4" style="font-size:11px;">
                                             <span style="font-size:17px;"> $@(Model[i].Price* Model[i].TempSqFt)</span>
-
+                                         
                                         </div>
                                     }
                                     <div class="col-2 col-lg-1 p-0 pt-lg-4 text-center">
@@ -146,4 +146,9 @@
 else
 {
     <h3>No Item in your cart. Please continue Shopping.</h3>
+}
+
+
+@section Scripts{ 
+<partial name="_ValidationScriptsPartial" />
 }

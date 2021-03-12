@@ -42,9 +42,9 @@
                                             }
                                             else
                                             {
-                                                <input asp-for="@Model.Product.TempSqFt"  class="form-control" />
+                                                <input asp-for="@Model.Product.TempSqFt" class="form-control" />
                                             }
-                                        <span asp-validation-for="@Model.Product.TempSqFt" class="text-danger"></span>
+                                            <span asp-validation-for="@Model.Product.TempSqFt" class="text-danger"></span>
                                         </div>
                                     }
 
@@ -74,3 +74,7 @@
         </div>
     </form>
 </div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
