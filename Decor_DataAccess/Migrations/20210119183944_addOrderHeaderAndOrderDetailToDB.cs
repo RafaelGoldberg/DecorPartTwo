@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Decor_DataAccess.Migrations
+namespace Tzedakah_DataAccess.Migrations
 {
     public partial class addOrderHeaderAndOrderDetailToDB : Migration
     {

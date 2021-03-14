@@ -1,6 +1,6 @@
 using System;
 
-namespace Decor_Models
+namespace Tzedakah_Models
 {
     public class ErrorViewModel
     {

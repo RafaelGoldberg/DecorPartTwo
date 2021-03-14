@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Decor_Models.ViewModels
+namespace Tzedakah_Models.ViewModels
 {
     public class OrderVM
     {

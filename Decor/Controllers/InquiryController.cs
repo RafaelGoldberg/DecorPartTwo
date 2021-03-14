@@ -1,9 +1,9 @@
-﻿using Decor_DataAccess.Data;
-using Decor_DataAccess.Repository;
-using Decor_DataAccess.Repository.IRepository;
-using Decor_Models;
-using Decor_Models.ViewModels;
-using Decor_Utility;
+﻿using Tzedakah_DataAccess.Data;
+using Tzedakah_DataAccess.Repository;
+using Tzedakah_DataAccess.Repository.IRepository;
+using Tzedakah_Models;
+using Tzedakah_Models.ViewModels;
+using Tzedakah_Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Decor.Controllers
+namespace Tzedakah.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class InquiryController : Controller

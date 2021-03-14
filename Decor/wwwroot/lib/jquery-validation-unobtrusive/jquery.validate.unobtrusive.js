@@ -224,7 +224,7 @@
 
         parse: function (selector) {
             /// <summary>
-            /// Parses all the HTML elements in the specified selector. It looks for input elements decorated
+            /// Parses all the HTML elements in the specified selector. It looks for input elements Tzedakahated
             /// with the [data-val=true] attribute value and enables validation according to the data-val-*
             /// attribute values.
             /// </summary>

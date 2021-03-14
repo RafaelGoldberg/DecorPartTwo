@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Decor_DataAccess.Initializer
+namespace Tzedakah_DataAccess.Initializer
 {
     public interface IDbInitializer
     {

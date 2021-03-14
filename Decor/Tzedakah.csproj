@@ -27,9 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Decor_DataAccess\Decor_DataAccess.csproj" />
-    <ProjectReference Include="..\Decor_Models\Decor_Models.csproj" />
-    <ProjectReference Include="..\Decor_Utility\Decor_Utility.csproj" />
+    <ProjectReference Include="..\Decor_DataAccess\Tzedakah_DataAccess.csproj" />
+    <ProjectReference Include="..\Decor_Models\Tzedakah_Models.csproj" />
+    <ProjectReference Include="..\Decor_Utility\Tzedakah_Utility.csproj" />
   </ItemGroup>
 
 </Project>

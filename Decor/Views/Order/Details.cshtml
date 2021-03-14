@@ -1,4 +1,4 @@
-﻿@model Decor_Models.ViewModels.OrderVM
+﻿@model Tzedakah_Models.ViewModels.OrderVM
 
 <form method="post">
     <input asp-for="OrderHeader.Id" type="hidden"  />
@@ -155,18 +155,18 @@
 
                             <br />
 
-                            @if (Model.OrderHeader.OrderStatus == Decor_Utility.WC.StatusApproved)
+                            @if (Model.OrderHeader.OrderStatus == Tzedakah_Utility.WC.StatusApproved)
                             {
                                 <input type="submit" value="Start Processing" class="btn btn-info form-control" formmethod="post" asp-action="StartProcessing" />
                             }
 
-                            @if (Model.OrderHeader.OrderStatus == Decor_Utility.WC.StatusProcessing)
+                            @if (Model.OrderHeader.OrderStatus == Tzedakah_Utility.WC.StatusProcessing)
                             {
                                 <input type="submit" value="Ship Order" class="btn btn-info form-control" formmethod="post" asp-action="ShipOrder" />
                             }
 
-                            @if (Model.OrderHeader.OrderStatus != Decor_Utility.WC.StatusRefunded &&
-                              Model.OrderHeader.OrderStatus != Decor_Utility.WC.StatusCancelled)
+                            @if (Model.OrderHeader.OrderStatus != Tzedakah_Utility.WC.StatusRefunded &&
+                              Model.OrderHeader.OrderStatus != Tzedakah_Utility.WC.StatusCancelled)
                             {
                                 <div class="pt-2">
                                     <button type="submit"

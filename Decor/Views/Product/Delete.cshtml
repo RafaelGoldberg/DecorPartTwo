@@ -1,5 +1,5 @@
-﻿@model Decor_Models.Product
-@*@model Decor_Models.ViewModels.ProductVM*@
+﻿@model Tzedakah_Models.Product
+@*@model Tzedakah_Models.ViewModels.ProductVM*@
 
 
 <form method="post" asp-action="DeletePost">
@@ -78,7 +78,7 @@
             <div class="col-4">
                 @if (!String.IsNullOrEmpty(Model.Image))
                 {
-                    <img src="@Decor_Utility.WC.ImagePath\@Model.Image" class="w-100" style="border:1px solid #bbb; border-radius:5px; " />
+                    <img src="@Tzedakah_Utility.WC.ImagePath\@Model.Image" class="w-100" style="border:1px solid #bbb; border-radius:5px; " />
                 }
 
             </div>

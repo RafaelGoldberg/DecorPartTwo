@@ -11,7 +11,7 @@
                 <div class="card-body px-5 pt-4">
                     <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
                         <h3 class="col-12 text-success text-center py-4">
-                            @if (User.IsInRole(Decor_Utility.WC.AdminRole))
+                            @if (User.IsInRole(Tzedakah_Utility.WC.AdminRole))
                             {
                                 <strong>Register an Admin User</strong>
                             }
@@ -52,7 +52,7 @@
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                         </div>
                         <div class="py-2">
-                            @if (User.IsInRole(Decor_Utility.WC.AdminRole))
+                            @if (User.IsInRole(Tzedakah_Utility.WC.AdminRole))
                             {
                                 <button type="submit" class="btn btn-warning form-control">Register Admin User</button>
                             }
@@ -63,7 +63,7 @@
                         </div>
 
                     </form>
-                    @if (!User.IsInRole(Decor_Utility.WC.AdminRole))
+                    @if (!User.IsInRole(Tzedakah_Utility.WC.AdminRole))
                     {
                         <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
                             <p>

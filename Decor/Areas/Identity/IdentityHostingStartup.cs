@@ -1,5 +1,5 @@
 ﻿using System;
-using Decor_DataAccess.Data;
+using Tzedakah_DataAccess.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -7,8 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly: HostingStartup(typeof(Decor.Areas.Identity.IdentityHostingStartup))]
-namespace Decor.Areas.Identity
+[assembly: HostingStartup(typeof(Tzedakah.Areas.Identity.IdentityHostingStartup))]
+namespace Tzedakah.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {

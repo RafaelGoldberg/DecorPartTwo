@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Decor_Models.ViewModels
+namespace Tzedakah_Models.ViewModels
 {
     public class ProductVM
     {

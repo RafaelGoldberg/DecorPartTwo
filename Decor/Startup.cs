@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Decor_DataAccess.Data;
-using Decor_DataAccess.Initializer;
-using Decor_DataAccess.Repository;
-using Decor_DataAccess.Repository.IRepository;
-using Decor_Utility;
-using Decor_Utility.BrainTree;
+using Tzedakah_DataAccess.Data;
+using Tzedakah_DataAccess.Initializer;
+using Tzedakah_DataAccess.Repository;
+using Tzedakah_DataAccess.Repository.IRepository;
+using Tzedakah_Utility;
+using Tzedakah_Utility.BrainTree;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -18,7 +18,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Decor
+namespace Tzedakah
 {
     public class Startup
     {

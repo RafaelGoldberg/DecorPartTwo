@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace Decor.Areas.Identity.Pages.Account.Manage
+namespace Tzedakah.Areas.Identity.Pages.Account.Manage
 {
     public class EnableAuthenticatorModel : PageModel
     {
@@ -148,7 +148,7 @@ namespace Decor.Areas.Identity.Pages.Account.Manage
         {
             return string.Format(
                 AuthenticatorUriFormat,
-                _urlEncoder.Encode("Decor"),
+                _urlEncoder.Encode("Tzedakah"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }

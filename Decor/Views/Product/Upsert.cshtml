@@ -1,4 +1,4 @@
-﻿@model Decor_Models.ViewModels.ProductVM
+﻿@model Tzedakah_Models.ViewModels.ProductVM
 @{
 
     var title = "Create Product";
@@ -119,7 +119,7 @@
             <div class="col-4">
                 @if (!String.IsNullOrEmpty(Model.Product.Image))
                 {
-                    <img src="@Decor_Utility.WC.ImagePath\@Model.Product.Image" class="w-100" style="border:1px solid #bbb; border-radius:5px; " />
+                    <img src="@Tzedakah_Utility.WC.ImagePath\@Model.Product.Image" class="w-100" style="border:1px solid #bbb; border-radius:5px; " />
                 }
 
             </div>

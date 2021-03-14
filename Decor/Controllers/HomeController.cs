@@ -5,15 +5,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Decor_Models;
-using Decor_DataAccess.Data;
-using Decor_Models.ViewModels;
+using Tzedakah_Models;
+using Tzedakah_DataAccess.Data;
+using Tzedakah_Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
-using Decor_Utility;
-using Decor_DataAccess.Repository.IRepository;
+using Tzedakah_Utility;
+using Tzedakah_DataAccess.Repository.IRepository;
 
-namespace Decor.Controllers
+namespace Tzedakah.Controllers
 {
     public class HomeController : Controller
     {

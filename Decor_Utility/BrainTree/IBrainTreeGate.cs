@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Decor_Utility.BrainTree
+namespace Tzedakah_Utility.BrainTree
 {
     public interface IBrainTreeGate
     {

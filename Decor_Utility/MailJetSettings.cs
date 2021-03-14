@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Decor_Utility
+namespace Tzedakah_Utility
 {
     public class MailJetSettings
     {

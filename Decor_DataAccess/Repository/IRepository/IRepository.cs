@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace Decor_DataAccess.Repository.IRepository
+namespace Tzedakah_DataAccess.Repository.IRepository
 {
     public interface IRepository<T> where T : class
     {

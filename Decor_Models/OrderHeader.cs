@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Decor_Models
+namespace Tzedakah_Models
 {
     public class OrderHeader
     {

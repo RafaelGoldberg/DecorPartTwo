@@ -1,14 +1,14 @@
-﻿using Decor_DataAccess.Data;
-using Decor_DataAccess.Repository.IRepository;
-using Decor_Models;
-using Decor_Utility;
+﻿using Tzedakah_DataAccess.Data;
+using Tzedakah_DataAccess.Repository.IRepository;
+using Tzedakah_Models;
+using Tzedakah_Utility;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Decor_DataAccess.Repository
+namespace Tzedakah_DataAccess.Repository
 {
     public class InquiryHeaderRepository : Repository<InquiryHeader>, IInquiryHeaderRepository
     {

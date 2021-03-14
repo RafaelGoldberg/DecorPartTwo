@@ -55,13 +55,13 @@ p {
 
 abbr[title],
 abbr[data-original-title] {
-  text-decoration: underline;
-  -webkit-text-decoration: underline dotted;
-  text-decoration: underline dotted;
+  text-Tzedakahation: underline;
+  -webkit-text-Tzedakahation: underline dotted;
+  text-Tzedakahation: underline dotted;
   cursor: help;
   border-bottom: 0;
-  -webkit-text-decoration-skip-ink: none;
-  text-decoration-skip-ink: none;
+  -webkit-text-Tzedakahation-skip-ink: none;
+  text-Tzedakahation-skip-ink: none;
 }
 
 address {
@@ -124,23 +124,23 @@ sup {
 
 a {
   color: #007bff;
-  text-decoration: none;
+  text-Tzedakahation: none;
   background-color: transparent;
 }
 
 a:hover {
   color: #0056b3;
-  text-decoration: underline;
+  text-Tzedakahation: underline;
 }
 
 a:not([href]):not([tabindex]) {
   color: inherit;
-  text-decoration: none;
+  text-Tzedakahation: none;
 }
 
 a:not([href]):not([tabindex]):hover, a:not([href]):not([tabindex]):focus {
   color: inherit;
-  text-decoration: none;
+  text-Tzedakahation: none;
 }
 
 a:not([href]):not([tabindex]):focus {
@@ -303,7 +303,7 @@ progress {
   -webkit-appearance: none;
 }
 
-[type="search"]::-webkit-search-decoration {
+[type="search"]::-webkit-search-Tzedakahation {
   -webkit-appearance: none;
 }
 

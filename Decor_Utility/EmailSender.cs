@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Decor_Utility
+namespace Tzedakah_Utility
 {
     public class EmailSender : IEmailSender
     {
@@ -52,7 +52,7 @@ namespace Decor_Utility
           email
          }, {
           "Name",
-          "Decor Shop"
+          "Tzedakah Shop"
          }
         }
        }

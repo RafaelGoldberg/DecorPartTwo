@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
-using Decor_DataAccess.Data;
-using Decor_DataAccess.Repository.IRepository;
+using Tzedakah_DataAccess.Data;
+using Tzedakah_DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 
-namespace Decor_DataAccess.Repository
+namespace Tzedakah_DataAccess.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {

@@ -1,4 +1,4 @@
-﻿using Decor_Models;
+﻿using Tzedakah_Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Decor_DataAccess.Data
+namespace Tzedakah_DataAccess.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

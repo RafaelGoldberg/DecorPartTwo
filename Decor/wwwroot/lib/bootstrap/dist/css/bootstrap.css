@@ -85,13 +85,13 @@ p {
 
 abbr[title],
 abbr[data-original-title] {
-  text-decoration: underline;
-  -webkit-text-decoration: underline dotted;
-  text-decoration: underline dotted;
+  text-Tzedakahation: underline;
+  -webkit-text-Tzedakahation: underline dotted;
+  text-Tzedakahation: underline dotted;
   cursor: help;
   border-bottom: 0;
-  -webkit-text-decoration-skip-ink: none;
-  text-decoration-skip-ink: none;
+  -webkit-text-Tzedakahation-skip-ink: none;
+  text-Tzedakahation-skip-ink: none;
 }
 
 address {
@@ -154,23 +154,23 @@ sup {
 
 a {
   color: #007bff;
-  text-decoration: none;
+  text-Tzedakahation: none;
   background-color: transparent;
 }
 
 a:hover {
   color: #0056b3;
-  text-decoration: underline;
+  text-Tzedakahation: underline;
 }
 
 a:not([href]):not([tabindex]) {
   color: inherit;
-  text-decoration: none;
+  text-Tzedakahation: none;
 }
 
 a:not([href]):not([tabindex]):hover, a:not([href]):not([tabindex]):focus {
   color: inherit;
-  text-decoration: none;
+  text-Tzedakahation: none;
 }
 
 a:not([href]):not([tabindex]):focus {
@@ -333,7 +333,7 @@ progress {
   -webkit-appearance: none;
 }
 
-[type="search"]::-webkit-search-decoration {
+[type="search"]::-webkit-search-Tzedakahation {
   -webkit-appearance: none;
 }
 
@@ -2402,7 +2402,7 @@ textarea.form-control {
 
 .btn:hover {
   color: #212529;
-  text-decoration: none;
+  text-Tzedakahation: none;
 }
 
 .btn:focus, .btn.focus {
@@ -2950,16 +2950,16 @@ fieldset:disabled a.btn {
 .btn-link {
   font-weight: 400;
   color: #007bff;
-  text-decoration: none;
+  text-Tzedakahation: none;
 }
 
 .btn-link:hover {
   color: #0056b3;
-  text-decoration: underline;
+  text-Tzedakahation: underline;
 }
 
 .btn-link:focus, .btn-link.focus {
-  text-decoration: underline;
+  text-Tzedakahation: underline;
   box-shadow: none;
 }
 
@@ -3241,13 +3241,13 @@ input[type="button"].btn-block {
 
 .dropdown-item:hover, .dropdown-item:focus {
   color: #16181b;
-  text-decoration: none;
+  text-Tzedakahation: none;
   background-color: #f8f9fa;
 }
 
 .dropdown-item.active, .dropdown-item:active {
   color: #fff;
-  text-decoration: none;
+  text-Tzedakahation: none;
   background-color: #007bff;
 }
 
@@ -4066,7 +4066,7 @@ input[type="button"].btn-block {
 }
 
 .nav-link:hover, .nav-link:focus {
-  text-decoration: none;
+  text-Tzedakahation: none;
 }
 
 .nav-link.disabled {
@@ -4180,7 +4180,7 @@ input[type="button"].btn-block {
 }
 
 .navbar-brand:hover, .navbar-brand:focus {
-  text-decoration: none;
+  text-Tzedakahation: none;
 }
 
 .navbar-nav {
@@ -4228,7 +4228,7 @@ input[type="button"].btn-block {
 }
 
 .navbar-toggler:hover, .navbar-toggler:focus {
-  text-decoration: none;
+  text-Tzedakahation: none;
 }
 
 .navbar-toggler-icon {
@@ -4598,7 +4598,7 @@ input[type="button"].btn-block {
 }
 
 .card-link:hover {
-  text-decoration: none;
+  text-Tzedakahation: none;
 }
 
 .card-link + .card-link {
@@ -4823,11 +4823,11 @@ input[type="button"].btn-block {
 }
 
 .breadcrumb-item + .breadcrumb-item:hover::before {
-  text-decoration: underline;
+  text-Tzedakahation: underline;
 }
 
 .breadcrumb-item + .breadcrumb-item:hover::before {
-  text-decoration: none;
+  text-Tzedakahation: none;
 }
 
 .breadcrumb-item.active {
@@ -4856,7 +4856,7 @@ input[type="button"].btn-block {
 .page-link:hover {
   z-index: 2;
   color: #0056b3;
-  text-decoration: none;
+  text-Tzedakahation: none;
   background-color: #e9ecef;
   border-color: #dee2e6;
 }
@@ -4945,7 +4945,7 @@ input[type="button"].btn-block {
 }
 
 a.badge:hover, a.badge:focus {
-  text-decoration: none;
+  text-Tzedakahation: none;
 }
 
 .badge:empty {
@@ -5337,7 +5337,7 @@ a.badge-dark:focus, a.badge-dark.focus {
 .list-group-item-action:hover, .list-group-item-action:focus {
   z-index: 1;
   color: #495057;
-  text-decoration: none;
+  text-Tzedakahation: none;
   background-color: #f8f9fa;
 }
 
@@ -5649,7 +5649,7 @@ a.badge-dark:focus, a.badge-dark.focus {
 
 .close:hover {
   color: #000;
-  text-decoration: none;
+  text-Tzedakahation: none;
 }
 
 .close:not(:disabled):not(.disabled):hover, .close:not(:disabled):not(.disabled):focus {
@@ -5952,7 +5952,7 @@ a.close.disabled {
   line-height: 1.5;
   text-align: left;
   text-align: start;
-  text-decoration: none;
+  text-Tzedakahation: none;
   text-shadow: none;
   text-transform: none;
   letter-spacing: normal;
@@ -6065,7 +6065,7 @@ a.close.disabled {
   line-height: 1.5;
   text-align: left;
   text-align: start;
-  text-decoration: none;
+  text-Tzedakahation: none;
   text-shadow: none;
   text-transform: none;
   letter-spacing: normal;
@@ -6329,7 +6329,7 @@ a.close.disabled {
 .carousel-control-next:hover,
 .carousel-control-next:focus {
   color: #fff;
-  text-decoration: none;
+  text-Tzedakahation: none;
   outline: 0;
   opacity: 0.9;
 }
@@ -9936,8 +9936,8 @@ a.text-dark:hover, a.text-dark:focus {
   border: 0;
 }
 
-.text-decoration-none {
-  text-decoration: none !important;
+.text-Tzedakahation-none {
+  text-Tzedakahation: none !important;
 }
 
 .text-break {
@@ -9965,7 +9965,7 @@ a.text-dark:hover, a.text-dark:focus {
     box-shadow: none !important;
   }
   a:not(.btn) {
-    text-decoration: underline;
+    text-Tzedakahation: underline;
   }
   abbr[title]::after {
     content: " (" attr(title) ")";

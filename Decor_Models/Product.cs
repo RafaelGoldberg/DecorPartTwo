@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Decor_Models
+namespace Tzedakah_Models
 {
     public class Product
     {

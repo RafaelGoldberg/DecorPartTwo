@@ -1,6 +1,6 @@
-﻿using Decor_DataAccess.Data;
-using Decor_Models;
-using Decor_Utility;
+﻿using Tzedakah_DataAccess.Data;
+using Tzedakah_Models;
+using Tzedakah_Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Decor_DataAccess.Initializer
+namespace Tzedakah_DataAccess.Initializer
 {
     public class DbInitializer : IDbInitializer
     {
